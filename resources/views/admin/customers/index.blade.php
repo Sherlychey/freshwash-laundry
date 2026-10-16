@@ -1,0 +1,7 @@
+@extends('layouts.admin')
+@section('title','Pelanggan') @section('page','Pelanggan')
+@section('content')
+<div class="page-heading"><div><span class="eyebrow">DATA PELANGGAN</span><h1>Pelanggan</h1><p>Kelola informasi dan riwayat pelanggan.</p></div><a class="button button-primary" href="{{ route('admin.customers.create') }}">+ Tambah pelanggan</a></div>
+@include('admin.shared.flash')
+<section class="panel order-list-panel"><form class="order-filters" method="GET"><div class="field"><label for="q">Cari pelanggan</label><input id="q" name="q" value="{{ request('q') }}" placeholder="Nama, telepon, atau email"></div><button class="button button-primary filter-button">Cari</button></form><div class="table-wrap"><table class="data-table"><thead><tr><th>NAMA</th><th>TELEPON</th><th>EMAIL</th><th>PESANAN</th><th>AKSI</th></tr></thead><tbody>@forelse($customers as $customer)<tr><td><strong>{{ $customer->name }}</strong></td><td>{{ $customer->phone }}</td><td>{{ $customer->email ?: '—' }}</td><td>{{ $customer->orders_count }}</td><td><a class="table-action" href="{{ route('admin.customers.edit',$customer) }}">Ubah</a> <form class="inline-form" method="POST" action="{{ route('admin.customers.destroy',$customer) }}" data-confirm-delete>@csrf @method('DELETE')<button class="table-action text-danger">Hapus</button></form></td></tr>@empty<tr><td colspan="5" class="empty-row">Belum ada pelanggan.</td></tr>@endforelse</tbody></table></div><div class="pagination-wrap">{{ $customers->links() }}</div></section>
+@endsection

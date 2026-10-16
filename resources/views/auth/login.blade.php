@@ -1,0 +1,5 @@
+@extends('layouts.public')
+@section('title', 'Masuk Admin — FreshWash')
+@section('content')
+<main class="login-page"><a class="brand login-brand" href="{{ route('home') }}"><span class="brand-mark">F</span><span>fresh<span class="brand-light">wash</span><small>LAUNDRY CARE</small></span></a><div class="login-card"><span class="eyebrow">PORTAL TIM FRESHWASH</span><h1>Selamat datang<br>kembali.</h1><p>Masuk untuk mengelola operasional laundry Anda.</p>@if($errors->any())<div class="form-alert" role="alert">{{ $errors->first() }}</div>@endif<form method="POST" action="{{ route('login.store') }}">@csrf<label for="email">Email</label><input id="email" name="email" type="email" value="{{ old('email') }}" autocomplete="username" required autofocus placeholder="nama@freshwash.id"><label for="password">Kata sandi</label><input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Masukkan kata sandi"><button class="button button-primary login-submit" type="submit">Masuk ke dashboard <span>→</span></button></form></div><a class="login-back" href="{{ route('home') }}">← Kembali ke beranda</a></main>
+@endsection
